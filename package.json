@@ -1,0 +1,19 @@
+{
+  "name": "domino",
+  "version": "0.1.0",
+  "description": "The game of Dominos",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aaronpanch/domino.git"
+  },
+  "author": "Aaron Panchal",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aaronpanch/domino/issues"
+  },
+  "homepage": "https://github.com/aaronpanch/domino#readme"
+}
