@@ -2,7 +2,7 @@
   "name": "domino",
   "version": "0.1.0",
   "description": "The game of Dominos",
-  "main": "index.js",
+  "main": "game.js",
   "scripts": {
     "test": "mocha"
   },
