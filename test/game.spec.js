@@ -27,5 +27,16 @@ describe('game', () => {
         expect(player.score).to.equal(0);
       });
     });
+
+    it('should not have bones if full game', () => {
+      const tileset = generateTiles();
+      const gameState = newGame(tileset, 4);
+
+      expect(gameState.bones).to.have.lengthOf(0);
+      gameState.players.forEach(player => {
+        expect(player.tiles).to.have.lengthOf(7);
+        expect(player.score).to.equal(0);
+      });
+    });
   });
 });

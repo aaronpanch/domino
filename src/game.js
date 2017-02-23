@@ -16,7 +16,7 @@ function newGame(tileset, numPlayers, handSize = DEFAULT_HAND_SIZE) {
 
   const tiles = shuffle(tileset);
 
-  const players = Array(numPlayers).fill(undefined).map((a, i) => {
+  const players = Array(numPlayers).fill(undefined).map((_, i) => {
     return {
       tiles: tiles.slice(handSize * i, handSize * i + handSize),
       score: 0
