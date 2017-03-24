@@ -3,32 +3,31 @@ const shuffle = require('./shuffle');
 const DEFAULT_HAND_SIZE = 7;
 
 /*
-  A game is an object:
+  A Game is an object:
   {
     bones: Array<Domino>
   }
 */
 
-function newGame(tileset, numPlayers, handSize = DEFAULT_HAND_SIZE) {
+// dealTiles: Array<Domino>, Number, (Number)
+//   -> { bones: Array<Domino>, hands: Array<Array<Domino>> }
+function dealTiles(tileset, numPlayers, handSize = DEFAULT_HAND_SIZE) {
   if (tileset.length / numPlayers < handSize) {
     throw 'Too many players!';
   }
 
   const tiles = shuffle(tileset);
 
-  const players = Array(numPlayers).fill(undefined).map((_, i) => {
-    return {
-      tiles: tiles.slice(handSize * i, handSize * i + handSize),
-      score: 0
-    };
-  });
+  const hands = Array(numPlayers).fill(undefined).map((_, i) =>
+    tiles.slice(handSize * i, handSize * i + handSize)
+  );
 
   return {
     bones: tiles.slice(numPlayers * handSize),
-    players
+    hands
   };
 }
 
 module.exports = {
-  newGame
+  dealTiles
 }

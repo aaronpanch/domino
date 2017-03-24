@@ -1,5 +1,5 @@
 /*
-  A domino is a pair (an Array)
+  A Domino is a pair (an Array)
   [Number, Number]
 
   e.g.
