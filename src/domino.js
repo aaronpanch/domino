@@ -8,10 +8,15 @@
 
 const DOMINO_VALUES = [0, 1, 2, 3, 4, 5, 6];
 
-function generateTiles(values = DOMINO_VALUES) {
-  return values.map((l, i) => (
+// generateTiles: Array<Number> -> Array<Domino>
+// Generates a tileset of all the combination of values
+const generateTiles = (values = DOMINO_VALUES) =>
+  values.map((l, i) => (
     values.slice(i).map(r => [l, r])
   )).reduce((t, c) => t.concat(c), []);
-};
 
-module.exports = { generateTiles };
+// double: Domino -> Boolean
+// Determines if the Domino is a double
+const double = ([l, r]) => l === r;
+
+module.exports = { double, generateTiles };

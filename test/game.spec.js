@@ -37,4 +37,40 @@ describe('game', () => {
       });
     });
   });
+
+  describe('validDeal', () => {
+    const { validDeal } = game;
+
+    it('should pass if there a hand has fewer than half of the doubles', () => {
+      const hands = [
+        [
+          [1,1],
+          [2,2],
+          [3,3],
+          [3,4],
+          [5,6],
+          [1,2],
+          [2,3]
+        ]
+      ];
+
+      expect(validDeal({ hands })).to.be.true;
+    });
+
+    it('should fail if hand has more than half the doubles', () => {
+      const hands = [
+        [
+          [1,1],
+          [2,2],
+          [3,3],
+          [3,4],
+          [5,6],
+          [1,2],
+          [6,6]
+        ]
+      ];
+
+      expect(validDeal({ hands })).to.be.false;
+    });
+  });
 });

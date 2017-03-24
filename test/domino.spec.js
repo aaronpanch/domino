@@ -4,7 +4,7 @@ const domino = require('../src/domino');
 
 describe('domino', () => {
   describe('generateTiles', () => {
-    const generateTiles = domino.generateTiles;
+    const { generateTiles } = domino;
 
     it('should generate a default tileset', () => {
       const tiles = generateTiles();
@@ -24,6 +24,16 @@ describe('domino', () => {
         [2, 3],
         [3, 3]
       ]);
+    });
+  });
+
+  describe('double', () => {
+    const { double } = domino;
+
+    it('should report if domino is a double', () => {
+      expect(double([1,3])).to.be.false;
+      expect(double([3,3])).to.be.true;
+      expect(double([0,0])).to.be.true;
     });
   });
 });
