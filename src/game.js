@@ -15,7 +15,8 @@ const DEFAULT_HAND_SIZE = 7;
       leaves: Array<Number> || null
     },
     dealer: Number,
-    currentPlayer: Number
+    currentPlayer: Number,
+    tileset: Array<Domino>
   }
 */
 
@@ -48,7 +49,7 @@ const validDeal = ({ hands }) =>
 // newGame: Number -> Game
 // Creates a new Game object representing a new game (zero score)
 const newGame = numPlayers => {
-  let tileset = generateTiles();
+  const tileset = generateTiles();
   let deal = dealTiles(tileset, numPlayers);
 
   while(!validDeal(deal)) {
@@ -65,7 +66,8 @@ const newGame = numPlayers => {
       leaves: null
     },
     dealer: 0,
-    currentPlayer: 1
+    currentPlayer: 1,
+    tileset
   };
 }
 

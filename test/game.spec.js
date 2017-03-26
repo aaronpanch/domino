@@ -100,6 +100,9 @@ describe('game', () => {
       // Game Progress
       expect(gameState.dealer).to.equal(0);
       expect(gameState.currentPlayer).to.equal(1);
+
+      // Metadata
+      expect(gameState).to.have.property('tileset');
     });
   });
 });
