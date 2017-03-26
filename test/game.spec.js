@@ -41,7 +41,7 @@ describe('game', () => {
   describe('validDeal', () => {
     const { validDeal } = game;
 
-    it('should pass if there a hand has fewer than half of the doubles', () => {
+    it('should pass if all hands have fewer than half of the doubles', () => {
       const hands = [
         [
           [1,1],
@@ -71,6 +71,35 @@ describe('game', () => {
       ];
 
       expect(validDeal({ hands })).to.be.false;
+    });
+  });
+
+  describe('newGame', () => {
+    const { newGame } = game;
+
+    it('should generate a game object', () => {
+      const numPlayers = 2;
+      const gameState = newGame(numPlayers);
+
+      // Players
+      expect(gameState.hands).to.have.lengthOf(numPlayers);
+      expect(gameState.scores).to.have.lengthOf(numPlayers);
+      gameState.hands.forEach(hand =>
+        expect(hand).to.have.lengthOf(7)
+      );
+      gameState.scores.forEach(score =>
+        expect(score).to.equal(0)
+      );
+
+      // Board
+      expect(gameState.bones).to.have.lengthOf(28 - 7 * numPlayers);
+      expect(gameState.board.tiles).to.deep.equal([]);
+      expect(gameState.board.spinner).to.equal(null);
+      expect(gameState.board.leaves).to.equal(null);
+
+      // Game Progress
+      expect(gameState.dealer).to.equal(0);
+      expect(gameState.currentPlayer).to.equal(1);
     });
   });
 });
