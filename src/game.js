@@ -46,29 +46,41 @@ function dealTiles(tileset, numPlayers, handSize = DEFAULT_HAND_SIZE) {
 const validDeal = ({ hands }) =>
   hands.some(hand => hand.filter(double).length < hand.length / 2);
 
-// newGame: Number -> Game
-// Creates a new Game object representing a new game (zero score)
-const newGame = numPlayers => {
-  const tileset = generateTiles();
-  let deal = dealTiles(tileset, numPlayers);
+// newGame: Game -> Game
+// Deals a new game clearing hands/board but keeps score
+const newRound = game => {
+  const numPlayers = game.scores.length;
 
-  while(!validDeal(deal)) {
-    deal = dealTiles(tileset, numPlayers);
+  let deal;
+  while(!(deal && validDeal(deal))) {
+    deal = dealTiles(game.tileset, numPlayers);
   }
 
   return {
     hands: deal.hands,
-    scores: Array(numPlayers).fill(0),
+    scores: game.scores.slice(),
     bones: deal.bones,
     board: {
       tiles: [],
       spinner: null,
       leaves: null
     },
-    dealer: 0,
-    currentPlayer: 1,
-    tileset
+    dealer: (game.dealer + 1) % numPlayers,
+    currentPlayer: (game.dealer + 2) % numPlayers,
+    tileset: game.tileset.slice()
   };
+}
+
+// newGame: Number -> Game
+// Creates a new Game object representing a new game (zero score)
+const newGame = numPlayers => {
+  const tileset = generateTiles();
+
+  return newRound({
+    scores: Array(numPlayers).fill(0),
+    dealer: -1,
+    tileset
+  });
 }
 
 module.exports = {
