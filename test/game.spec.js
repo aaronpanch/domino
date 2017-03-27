@@ -76,33 +76,44 @@ describe('game', () => {
 
   describe('newGame', () => {
     const { newGame } = game;
+    const numPlayers = 2;
+    const gameState = newGame(numPlayers);
 
-    it('should generate a game object', () => {
-      const numPlayers = 2;
-      const gameState = newGame(numPlayers);
+    it('should generate a game object', () =>
+      expect(gameState).to.be.an('object')
+    );
 
-      // Players
+    it('should have hands for each player', () => {
       expect(gameState.hands).to.have.lengthOf(numPlayers);
-      expect(gameState.scores).to.have.lengthOf(numPlayers);
       gameState.hands.forEach(hand =>
         expect(hand).to.have.lengthOf(7)
       );
+    });
+
+    it('should set up scores initially as zero', () => {
+      expect(gameState.scores).to.have.lengthOf(numPlayers);
       gameState.scores.forEach(score =>
         expect(score).to.equal(0)
       );
+    });
 
-      // Board
+    it('should set up a blank game board', () => {
       expect(gameState.bones).to.have.lengthOf(28 - 7 * numPlayers);
       expect(gameState.board.tiles).to.deep.equal([]);
       expect(gameState.board.spinner).to.equal(null);
       expect(gameState.board.leaves).to.equal(null);
-
-      // Game Progress
-      expect(gameState.dealer).to.equal(0);
-      expect(gameState.currentPlayer).to.equal(1);
-
-      // Metadata
-      expect(gameState).to.have.property('tileset');
     });
+
+    it('should start the first player as dealer', () =>
+      expect(gameState.dealer).to.equal(0)
+    );
+
+    it('should set the next player with the current turn', () =>
+      expect(gameState.currentPlayer).to.equal(1)
+    );
+
+    it('should save the tileset', () =>
+      expect(gameState).to.have.property('tileset')
+    );
   });
 });
