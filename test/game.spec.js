@@ -1,4 +1,4 @@
-const expect = require('chai').expect
+const { expect } = require('chai');
 
 const game = require('../src/game');
 const { generateTiles } = require('../src/domino');

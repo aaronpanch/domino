@@ -19,4 +19,8 @@ const generateTiles = (values = DOMINO_VALUES) =>
 // Determines if the Domino is a double
 const double = ([l, r]) => l === r;
 
-module.exports = { double, generateTiles };
+const equal = (d1, d2) =>
+  (d1[0] === d2[0] && d1[1] === d2[1]) ||
+  (d1[1] === d2[0] && d1[0] === d2[1])
+
+module.exports = { double, equal, generateTiles };
