@@ -160,5 +160,9 @@ describe('game', () => {
       expect(newGameRound.board.spinner).to.equal(null);
       expect(newGameRound.board.leaves).to.equal(null);
     });
+
+    it('should leave the tileset untouched', () =>
+      expect(newGameRound.tileset).to.deep.equal(oldGame.tileset)
+    );
   });
 });
