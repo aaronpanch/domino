@@ -86,5 +86,6 @@ const newGame = numPlayers => {
 module.exports = {
   dealTiles,
   newGame,
+  newRound,
   validDeal
 }

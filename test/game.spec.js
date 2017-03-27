@@ -116,4 +116,49 @@ describe('game', () => {
       expect(gameState).to.have.property('tileset')
     );
   });
+
+  describe('newRound', () => {
+    const { newRound } = game;
+    const oldGame = {
+      hands: 'junk',
+      scores: [20, 40, 50],
+      bones: 'junk',
+      board: {
+        tiles: 'junk',
+        spinner: 'junk',
+        leaves: 'junk'
+      },
+      dealer: 2,
+      currentPlayer: 2,
+      tileset: generateTiles()
+    };
+
+    const newGameRound = newRound(oldGame);
+
+    it('should deal a new hand for each player', () => {
+      expect(newGameRound.hands).to.have.lengthOf(3);
+      newGameRound.hands.forEach(hand =>
+        expect(hand).to.have.lengthOf(7)
+      );
+    });
+
+    it('should preserve the score', () =>
+      expect(newGameRound.scores).to.deep.equal([20, 40, 50])
+    );
+
+    it('should increment the dealer', () =>
+      expect(newGameRound.dealer).to.equal(0)
+    );
+
+    it('should increment the player', () =>
+      expect(newGameRound.currentPlayer).to.equal(1)
+    );
+
+    it('should set up a blank game board', () => {
+      expect(newGameRound.bones).to.have.lengthOf(7);
+      expect(newGameRound.board.tiles).to.deep.equal([]);
+      expect(newGameRound.board.spinner).to.equal(null);
+      expect(newGameRound.board.leaves).to.equal(null);
+    });
+  });
 });
