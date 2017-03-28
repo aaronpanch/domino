@@ -12,7 +12,7 @@ const DEFAULT_HAND_SIZE = 7;
     board: {
       tiles: Array<Position>,
       spinner: Number || null,
-      leaves: Array<Number> || null
+      leaves: Array<Number>
     },
     dealer: Number,
     currentPlayer: Number,
@@ -63,7 +63,7 @@ const newRound = game => {
     board: {
       tiles: [],
       spinner: null,
-      leaves: null
+      leaves: [0]
     },
     dealer: (game.dealer + 1) % numPlayers,
     currentPlayer: (game.dealer + 2) % numPlayers,

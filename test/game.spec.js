@@ -101,7 +101,7 @@ describe('game', () => {
       expect(gameState.bones).to.have.lengthOf(28 - 7 * numPlayers);
       expect(gameState.board.tiles).to.deep.equal([]);
       expect(gameState.board.spinner).to.equal(null);
-      expect(gameState.board.leaves).to.equal(null);
+      expect(gameState.board.leaves).to.deep.equal([0]);
     });
 
     it('should start the first player as dealer', () =>
@@ -158,7 +158,7 @@ describe('game', () => {
       expect(newGameRound.bones).to.have.lengthOf(7);
       expect(newGameRound.board.tiles).to.deep.equal([]);
       expect(newGameRound.board.spinner).to.equal(null);
-      expect(newGameRound.board.leaves).to.equal(null);
+      expect(newGameRound.board.leaves).to.deep.equal([0]);
     });
 
     it('should leave the tileset untouched', () =>
