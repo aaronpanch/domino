@@ -99,7 +99,7 @@ describe('game', () => {
 
     it('should set up a blank game board', () => {
       expect(gameState.bones).to.have.lengthOf(28 - 7 * numPlayers);
-      expect(gameState.board.tiles).to.deep.equal([]);
+      expect(gameState.board.pieces).to.deep.equal([]);
       expect(gameState.board.spinner).to.equal(null);
       expect(gameState.board.leaves).to.deep.equal([0]);
     });
@@ -156,7 +156,7 @@ describe('game', () => {
 
     it('should set up a blank game board', () => {
       expect(newGameRound.bones).to.have.lengthOf(7);
-      expect(newGameRound.board.tiles).to.deep.equal([]);
+      expect(newGameRound.board.pieces).to.deep.equal([]);
       expect(newGameRound.board.spinner).to.equal(null);
       expect(newGameRound.board.leaves).to.deep.equal([0]);
     });

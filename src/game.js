@@ -10,7 +10,7 @@ const DEFAULT_HAND_SIZE = 7;
     scores: Array<Number>,
     bones: Array<Domino>
     board: {
-      tiles: Array<Position>,
+      pieces: Array<Position>,
       spinner: Number || null,
       leaves: Array<Number>
     },
@@ -61,7 +61,7 @@ const newRound = game => {
     scores: game.scores.slice(),
     bones: deal.bones,
     board: {
-      tiles: [],
+      pieces: [],
       spinner: null,
       leaves: [0]
     },
