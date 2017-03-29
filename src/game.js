@@ -1,5 +1,5 @@
 const shuffle = require('./shuffle');
-const { generateTiles, double } = require('./domino');
+const { generateTiles, isDouble } = require('./domino');
 
 const DEFAULT_HAND_SIZE = 7;
 
@@ -43,7 +43,7 @@ function dealTiles(tileset, numPlayers, handSize = DEFAULT_HAND_SIZE) {
 //   -> Boolean
 // Determines if the given deal is valid (less than half the doubles)
 const isValidDeal = ({ hands }) =>
-  hands.some(hand => hand.filter(double).length < hand.length / 2);
+  hands.some(hand => hand.filter(isDouble).length < hand.length / 2);
 
 // newRound: Game -> Game
 // Deals a new game clearing hands/board but keeps score

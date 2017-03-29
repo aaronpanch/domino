@@ -1,10 +1,10 @@
 const { expect } = require('chai');
 
-const domino = require('../src/domino');
+const Domino = require('../src/domino');
 
-describe('domino', () => {
+describe('Domino', () => {
   describe('generateTiles', () => {
-    const { generateTiles } = domino;
+    const { generateTiles } = Domino;
 
     it('should generate a default tileset', () => {
       const tiles = generateTiles();
@@ -27,28 +27,28 @@ describe('domino', () => {
     });
   });
 
-  describe('double', () => {
-    const { double } = domino;
+  describe('isDouble', () => {
+    const { isDouble } = Domino;
 
     it('should report if domino is a double', () => {
-      expect(double([1,3])).to.be.false;
-      expect(double([3,3])).to.be.true;
-      expect(double([0,0])).to.be.true;
+      expect(isDouble([1,3])).to.be.false;
+      expect(isDouble([3,3])).to.be.true;
+      expect(isDouble([0,0])).to.be.true;
     });
   });
 
-  describe('equal', () => {
-    const { equal } = domino;
+  describe('isEqual', () => {
+    const { isEqual } = Domino;
 
     it('should return true for same domino', () => {
-      expect(equal([1,2], [1,2])).to.be.true;
-      expect(equal([3,3], [3,3])).to.be.true;
-      expect(equal([3,2], [2,3])).to.be.true;
+      expect(isEqual([1,2], [1,2])).to.be.true;
+      expect(isEqual([3,3], [3,3])).to.be.true;
+      expect(isEqual([3,2], [2,3])).to.be.true;
     });
 
     it('should return false for different dominos', () => {
-      expect(equal([3,3], [3,2])).to.be.false;
-      expect(equal([0,3], [3,3])).to.be.false;
+      expect(isEqual([3,3], [3,2])).to.be.false;
+      expect(isEqual([0,3], [3,3])).to.be.false;
     });
   });
 });
