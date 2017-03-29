@@ -38,8 +38,8 @@ describe('game', () => {
     });
   });
 
-  describe('validDeal', () => {
-    const { validDeal } = game;
+  describe('isValidDeal', () => {
+    const { isValidDeal } = game;
 
     it('should pass if all hands have fewer than half of the doubles', () => {
       const hands = [
@@ -54,7 +54,7 @@ describe('game', () => {
         ]
       ];
 
-      expect(validDeal({ hands })).to.be.true;
+      expect(isValidDeal({ hands })).to.be.true;
     });
 
     it('should fail if hand has more than half the doubles', () => {
@@ -70,7 +70,7 @@ describe('game', () => {
         ]
       ];
 
-      expect(validDeal({ hands })).to.be.false;
+      expect(isValidDeal({ hands })).to.be.false;
     });
   });
 

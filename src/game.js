@@ -10,9 +10,8 @@ const DEFAULT_HAND_SIZE = 7;
     scores: Array<Number>,
     bones: Array<Domino>
     board: {
-      pieces: Array<Position>,
-      spinner: Number || null,
-      leaves: Array<Number>
+      pieces: Array<Domino>, // For the spinner, it's two-dimensional
+      spinner: Number || null
     },
     dealer: Number,
     currentPlayer: Number,
@@ -40,19 +39,19 @@ function dealTiles(tileset, numPlayers, handSize = DEFAULT_HAND_SIZE) {
   };
 }
 
-// validDeal: { bones: Array<Domino>, hands: Array<Array<Domino>> }
+// isValidDeal: { bones: Array<Domino>, hands: Array<Array<Domino>> }
 //   -> Boolean
 // Determines if the given deal is valid (less than half the doubles)
-const validDeal = ({ hands }) =>
+const isValidDeal = ({ hands }) =>
   hands.some(hand => hand.filter(double).length < hand.length / 2);
 
-// newGame: Game -> Game
+// newRound: Game -> Game
 // Deals a new game clearing hands/board but keeps score
 const newRound = game => {
   const numPlayers = game.scores.length;
 
   let deal;
-  while(!(deal && validDeal(deal))) {
+  while(!(deal && isValidDeal(deal))) {
     deal = dealTiles(game.tileset, numPlayers);
   }
 
@@ -87,5 +86,5 @@ module.exports = {
   dealTiles,
   newGame,
   newRound,
-  validDeal
+  isValidDeal
 }
