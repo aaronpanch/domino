@@ -61,8 +61,7 @@ const newRound = game => {
     bones: deal.bones,
     board: {
       pieces: [],
-      spinner: null,
-      leaves: [0]
+      spinner: null
     },
     dealer: (game.dealer + 1) % numPlayers,
     currentPlayer: (game.dealer + 2) % numPlayers,
