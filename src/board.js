@@ -24,29 +24,43 @@
     }
 */
 
+const isBlank = ({ tiles }) =>
+  Object.keys(tiles).length === 0;
+
 const get = ({ tiles }, [x, y]) =>
   tiles[x] && tiles[x][y]
 
-const leaves = ({ tiles, spinner }) => {
-  const xRange = Object.keys(tiles);
-
-  if (xRange.length === 0) { return {}; }  // blank board
-
-  let leaves = [
-    [Math.min(...xRange), 0],
-    [Math.max(...xRange), 0]
-  ];
-
-  if (spinner) {
-    const yRange = Object.keys(tiles[spinner[0]]);
-    leaves.push([spinner[0], Math.min(...yRange)]);
-    leaves.push([spinner[0], Math.max(...yRange)]);
-  }
-
-  return leaves;
+const canFourBranch = board => {
+  const { spinner } = board;
+  return (
+    spinner &&
+    get(board, [spinner[0] - 1, 0]) &&
+    get(board, [spinner[0] + 1, 0])
+  );
 }
 
+const validLocations = board => {
+  if (isBlank(board)) { return [ [0,0] ] };
+
+  const { tiles, spinner } = board;
+  const xRange = Object.keys(tiles);
+  let locations = [
+    [Math.min(...xRange) - 1, 0],
+    [Math.max(...xRange) + 1, 0]
+  ];
+
+  if (canFourBranch(board)) {
+    const yRange = Object.keys(tiles[spinner[0]]);
+    locations.push([spinner[0], Math.min(...yRange) - 1]);
+    locations.push([spinner[0], Math.max(...yRange) + 1]);
+  }
+
+  return locations;
+};
+
 module.exports = {
+  canFourBranch,
   get,
-  leaves
+  isBlank,
+  validLocations
 }

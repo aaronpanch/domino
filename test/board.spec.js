@@ -44,6 +44,23 @@ describe('Board', () => {
     spinner: null
   };
 
+  const unSpun = {
+    tiles: {
+      '-1': { 0: [2, 6] },
+         0: { 0: [6, 6] }
+    },
+    spinner: [0,0]
+  }
+
+  const twoDim = {
+    tiles: {
+      '-1': { 0: [2, 6] },
+         0: { 0: [6, 6] },
+         1: { 0: [6, 5] }
+    },
+    spinner: [0,0]
+  }
+
   describe('get', () => {
     it('should get the domino at the given coordinates', () => {
       expect(Board.get(centerSpinnerBoard, [0,0])).to.deep.equal([6,6]);
@@ -58,34 +75,61 @@ describe('Board', () => {
     });
   });
 
-  describe('leaves', () => {
-    it('should return the coordinates of the leaves with center spinner', () => {
-      expect(Board.leaves(centerSpinnerBoard)).to.deep.equal([
-        [-1,0],
-        [1,0],
-        [0,-1],
-        [0,1]
+  describe('canFourBranch', () => {
+    it('should determine if spinner can branch 4 ways', () => {
+      expect(Board.canFourBranch(unSpun)).to.be.falsy;
+      expect(Board.canFourBranch(blankBoard)).to.be.falsy;
+      expect(Board.canFourBranch(twoDim)).to.be.truthy;
+      expect(Board.canFourBranch(centerSpinnerBoard)).to.be.truthy;
+      expect(Board.canFourBranch(noSpinnerBoard)).to.be.falsy;
+      expect(Board.canFourBranch(offsetSpinnerBoard)).to.be.truthy;
+    });
+  });
+
+  describe('validLocations', () => {
+    it('should return the coordinates of the valid locations with center spinner', () => {
+      expect(Board.validLocations(centerSpinnerBoard)).to.deep.equal([
+        [-2,0],
+        [2,0],
+        [0,-2],
+        [0,2]
       ]);
     });
 
-    it('should return the coordinates of leaves when no spinner', () => {
-      expect(Board.leaves(noSpinnerBoard)).to.deep.equal([
-        [-1,0],
+    it('should return the coordinates of valid locations when no spinner', () => {
+      expect(Board.validLocations(noSpinnerBoard)).to.deep.equal([
+        [-2,0],
+        [2,0]
+      ]);
+    });
+
+    it('should return the coordinates of valid locations when offset spinner', () => {
+      expect(Board.validLocations(offsetSpinnerBoard)).to.deep.equal([
+        [-2,0],
+        [3,0],
+        [1,-2],
+        [1,2]
+      ]);
+    });
+
+    it('should return [0,0] for blankBoard', () => {
+      expect(Board.validLocations(blankBoard)).to.deep.equal([ [0,0] ]);
+    });
+
+    it('should return the coordinates of valid locations when unSpun board', () => {
+      expect(Board.validLocations(unSpun)).to.deep.equal([
+        [-2,0],
         [1,0]
       ]);
     });
 
-    it('should return the coordinates of leaves when offset spinner', () => {
-      expect(Board.leaves(offsetSpinnerBoard)).to.deep.equal([
-        [-1,0],
+    it('should return the coordinates of valid locations when twoDim board', () => {
+      expect(Board.validLocations(twoDim)).to.deep.equal([
+        [-2,0],
         [2,0],
-        [1,-1],
-        [1,1]
+        [0,-1],
+        [0,1]
       ]);
-    });
-
-    it('should return empty for blankBoard', () => {
-      expect(Board.leaves(blankBoard)).to.deep.equal({});
     });
   });
 });
