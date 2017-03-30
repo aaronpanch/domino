@@ -30,6 +30,8 @@ const get = ({ tiles }, [x, y]) =>
 const leaves = ({ tiles, spinner }) => {
   const xRange = Object.keys(tiles);
 
+  if (xRange.length === 0) { return {}; }  // blank board
+
   let leaves = [
     [Math.min(...xRange), 0],
     [Math.max(...xRange), 0]
